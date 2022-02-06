@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+
+namespace  Queenslab_Project.Controllers
+{
+    [Route("error")]
+    public class ErrorController : Controller
+    {
+        private readonly ILogger<ErrorController> logger;
+        public ErrorController(ILogger<ErrorController> logger)
+        {
+            this.logger = logger;
+        }
+        protected IActionResult LogError()
+        {
+            protected IActionResult LogError()
+         {
+            // This gets any exceptions
+            var excep = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            if (excep != null)
+            {
+                // finds error path
+
+                string path = excep.Path;
+
+                // Exception extraction
+
+                Exception ex = excep.Error;
+
+                var error = new {ErrorMessage = ex.Message, ErrorPath = path};
+                // I will decide where to log the error after some testing
+                logger.LogError($"The path {error.ErrorPath} threw an exception + {error.ErrorMessage}");
+
+                return BadRequest(error); 
+ 
+            } 
+            return BadRequest();
+         }
+
+        }
+    }
+}
