@@ -28,6 +28,7 @@ namespace Queenslab_Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDbContext<sampleContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))); 
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

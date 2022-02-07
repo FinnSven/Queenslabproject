@@ -11,7 +11,7 @@ using Queenslab_Project.Service;
 namespace Queenslab_Project.Controllers
 {
     [ApiController]
-    [Route("cust")]
+    [Route("api/[cust]")]
     // I would insert a style here. 
     public class CustController : ControllerBase
     {
@@ -24,10 +24,9 @@ namespace Queenslab_Project.Controllers
         }
 
         [HttpPost]
-
-        public PurchaseRequest CustData( [FromBody] PurchaseResponse buyRequest)
+        public PurchaseRequest CustData( [FromBody] PurchaseResponse purchaseResponse)
         {
-            return _LoyaltyService.ServoData();
+            return _LoyaltyService.ServoData(purchaseResponse);
         }
     }
 }
